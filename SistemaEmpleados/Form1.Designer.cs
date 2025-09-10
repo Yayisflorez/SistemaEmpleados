@@ -1,4 +1,4 @@
-﻿namespace SistemaEmpleados
+namespace SistemaEmpleados
 {
     partial class SitemaEmpleados
     {
@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SitemaEmpleados));
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtGenero = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnOpcion2 = new System.Windows.Forms.Button();
             this.btnOpcion1 = new System.Windows.Forms.Button();
-            this.txtGenero = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -102,27 +102,37 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(6, 8, 6, 8);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 8, 6, 8);
-            this.groupBox1.Size = new System.Drawing.Size(551, 264);
+            this.groupBox1.Size = new System.Drawing.Size(570, 264);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Personales";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // txtGenero
+            // 
+            this.txtGenero.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txtGenero.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGenero.Location = new System.Drawing.Point(147, 123);
+            this.txtGenero.Name = "txtGenero";
+            this.txtGenero.Size = new System.Drawing.Size(147, 29);
+            this.txtGenero.TabIndex = 13;
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Sitka Banner", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(362, 19);
+            this.label7.Location = new System.Drawing.Point(430, 24);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(91, 28);
             this.label7.TabIndex = 12;
             this.label7.Text = "Fotografia:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Image = global::SistemaEmpleados.Properties.Resources.mujer;
-            this.pictureBox1.Location = new System.Drawing.Point(390, 41);
+            this.pictureBox1.Location = new System.Drawing.Point(408, 55);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(143, 153);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -134,8 +144,9 @@
             this.btnGuardar.BackColor = System.Drawing.Color.MediumPurple;
             this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGuardar.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.Location = new System.Drawing.Point(401, 214);
+            this.btnGuardar.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGuardar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnGuardar.Location = new System.Drawing.Point(423, 217);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(114, 36);
             this.btnGuardar.TabIndex = 7;
@@ -232,7 +243,7 @@
             // 
             this.lblMensajeEmple.AutoSize = true;
             this.lblMensajeEmple.Font = new System.Drawing.Font("Sitka Banner", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMensajeEmple.Location = new System.Drawing.Point(63, 378);
+            this.lblMensajeEmple.Location = new System.Drawing.Point(38, 376);
             this.lblMensajeEmple.Name = "lblMensajeEmple";
             this.lblMensajeEmple.Size = new System.Drawing.Size(100, 28);
             this.lblMensajeEmple.TabIndex = 7;
@@ -243,8 +254,9 @@
             this.btnModificar.BackColor = System.Drawing.Color.MediumPurple;
             this.btnModificar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnModificar.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Location = new System.Drawing.Point(401, 34);
+            this.btnModificar.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnModificar.Location = new System.Drawing.Point(423, 37);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(114, 37);
             this.btnModificar.TabIndex = 5;
@@ -276,10 +288,11 @@
             this.btnCalcularEdad.BackColor = System.Drawing.Color.MediumPurple;
             this.btnCalcularEdad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCalcularEdad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCalcularEdad.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalcularEdad.Location = new System.Drawing.Point(78, 35);
+            this.btnCalcularEdad.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalcularEdad.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCalcularEdad.Location = new System.Drawing.Point(89, 38);
             this.btnCalcularEdad.Name = "btnCalcularEdad";
-            this.btnCalcularEdad.Size = new System.Drawing.Size(168, 37);
+            this.btnCalcularEdad.Size = new System.Drawing.Size(186, 37);
             this.btnCalcularEdad.TabIndex = 8;
             this.btnCalcularEdad.Text = "Calcular edad";
             this.btnCalcularEdad.UseVisualStyleBackColor = false;
@@ -289,9 +302,9 @@
             // 
             this.txtCalcularEdad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtCalcularEdad.Font = new System.Drawing.Font("Sitka Banner", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCalcularEdad.Location = new System.Drawing.Point(254, 38);
+            this.txtCalcularEdad.Location = new System.Drawing.Point(281, 44);
             this.txtCalcularEdad.Name = "txtCalcularEdad";
-            this.txtCalcularEdad.Size = new System.Drawing.Size(161, 31);
+            this.txtCalcularEdad.Size = new System.Drawing.Size(175, 31);
             this.txtCalcularEdad.TabIndex = 9;
             // 
             // btnCalcularAntiguedad
@@ -299,10 +312,11 @@
             this.btnCalcularAntiguedad.BackColor = System.Drawing.Color.MediumPurple;
             this.btnCalcularAntiguedad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCalcularAntiguedad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCalcularAntiguedad.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalcularAntiguedad.Location = new System.Drawing.Point(78, 86);
+            this.btnCalcularAntiguedad.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalcularAntiguedad.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCalcularAntiguedad.Location = new System.Drawing.Point(89, 81);
             this.btnCalcularAntiguedad.Name = "btnCalcularAntiguedad";
-            this.btnCalcularAntiguedad.Size = new System.Drawing.Size(168, 37);
+            this.btnCalcularAntiguedad.Size = new System.Drawing.Size(186, 37);
             this.btnCalcularAntiguedad.TabIndex = 10;
             this.btnCalcularAntiguedad.Text = "Calcular antigüedad";
             this.btnCalcularAntiguedad.UseVisualStyleBackColor = false;
@@ -312,17 +326,18 @@
             // 
             this.txtAntiguedad.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtAntiguedad.Font = new System.Drawing.Font("Sitka Banner", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAntiguedad.Location = new System.Drawing.Point(254, 89);
+            this.txtAntiguedad.Location = new System.Drawing.Point(281, 89);
             this.txtAntiguedad.Name = "txtAntiguedad";
-            this.txtAntiguedad.Size = new System.Drawing.Size(161, 31);
+            this.txtAntiguedad.Size = new System.Drawing.Size(175, 31);
             this.txtAntiguedad.TabIndex = 11;
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnLimpiar.BackColor = System.Drawing.Color.MediumPurple;
             this.btnLimpiar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnLimpiar.Location = new System.Drawing.Point(31, 38);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(112, 34);
@@ -333,10 +348,11 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnSalir.BackColor = System.Drawing.Color.MediumPurple;
             this.btnSalir.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnSalir.Location = new System.Drawing.Point(423, 38);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(112, 34);
@@ -354,9 +370,9 @@
             this.groupBox2.Controls.Add(this.txtAntiguedad);
             this.groupBox2.Controls.Add(this.btnCalcularAntiguedad);
             this.groupBox2.Font = new System.Drawing.Font("Stencil", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 409);
+            this.groupBox2.Location = new System.Drawing.Point(12, 402);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(551, 173);
+            this.groupBox2.Size = new System.Drawing.Size(573, 180);
             this.groupBox2.TabIndex = 14;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Cálculos";
@@ -365,9 +381,9 @@
             // 
             this.txtPrestaciones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtPrestaciones.Font = new System.Drawing.Font("Sitka Banner", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrestaciones.Location = new System.Drawing.Point(252, 135);
+            this.txtPrestaciones.Location = new System.Drawing.Point(279, 132);
             this.txtPrestaciones.Name = "txtPrestaciones";
-            this.txtPrestaciones.Size = new System.Drawing.Size(161, 31);
+            this.txtPrestaciones.Size = new System.Drawing.Size(177, 31);
             this.txtPrestaciones.TabIndex = 15;
             // 
             // btnCalcularPrestaciones
@@ -375,13 +391,15 @@
             this.btnCalcularPrestaciones.BackColor = System.Drawing.Color.MediumPurple;
             this.btnCalcularPrestaciones.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCalcularPrestaciones.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCalcularPrestaciones.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalcularPrestaciones.Location = new System.Drawing.Point(78, 129);
+            this.btnCalcularPrestaciones.Font = new System.Drawing.Font("Sitka Banner", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalcularPrestaciones.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnCalcularPrestaciones.Location = new System.Drawing.Point(89, 126);
             this.btnCalcularPrestaciones.Name = "btnCalcularPrestaciones";
-            this.btnCalcularPrestaciones.Size = new System.Drawing.Size(168, 37);
+            this.btnCalcularPrestaciones.Size = new System.Drawing.Size(184, 37);
             this.btnCalcularPrestaciones.TabIndex = 14;
             this.btnCalcularPrestaciones.Text = "Calcular Prestaciones";
             this.btnCalcularPrestaciones.UseVisualStyleBackColor = false;
+            this.btnCalcularPrestaciones.Click += new System.EventHandler(this.btnCalcularPrestaciones_Click);
             // 
             // groupBox3
             // 
@@ -391,7 +409,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Stencil", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 292);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(551, 81);
+            this.groupBox3.Size = new System.Drawing.Size(573, 81);
             this.groupBox3.TabIndex = 15;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Salario";
@@ -412,45 +430,40 @@
             // 
             // btnOpcion2
             // 
-            this.btnOpcion2.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnOpcion2.BackColor = System.Drawing.Color.MediumPurple;
             this.btnOpcion2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOpcion2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpcion2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpcion2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnOpcion2.Location = new System.Drawing.Point(294, 38);
             this.btnOpcion2.Name = "btnOpcion2";
             this.btnOpcion2.Size = new System.Drawing.Size(112, 34);
             this.btnOpcion2.TabIndex = 15;
             this.btnOpcion2.Text = "Opcion 2";
             this.btnOpcion2.UseVisualStyleBackColor = false;
+            this.btnOpcion2.Click += new System.EventHandler(this.btnOpcion2_Click);
             // 
             // btnOpcion1
             // 
-            this.btnOpcion1.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.btnOpcion1.BackColor = System.Drawing.Color.MediumPurple;
             this.btnOpcion1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOpcion1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOpcion1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpcion1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.btnOpcion1.Location = new System.Drawing.Point(163, 38);
             this.btnOpcion1.Name = "btnOpcion1";
             this.btnOpcion1.Size = new System.Drawing.Size(112, 34);
             this.btnOpcion1.TabIndex = 14;
             this.btnOpcion1.Text = "Opcion 1";
             this.btnOpcion1.UseVisualStyleBackColor = false;
-            // 
-            // txtGenero
-            // 
-            this.txtGenero.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.txtGenero.Font = new System.Drawing.Font("Sylfaen", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGenero.Location = new System.Drawing.Point(147, 127);
-            this.txtGenero.Name = "txtGenero";
-            this.txtGenero.Size = new System.Drawing.Size(147, 29);
-            this.txtGenero.TabIndex = 13;
+            this.btnOpcion1.Click += new System.EventHandler(this.btnOpcion1_Click);
             // 
             // SitemaEmpleados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 39F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(579, 688);
+            this.ClientSize = new System.Drawing.Size(597, 688);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
