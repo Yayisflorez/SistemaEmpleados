@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +15,6 @@ namespace SistemaEmpleados
     public partial class SitemaEmpleados : Form
     {
         Empleado empleado;
-        Fecha fecha;
 
         private const string PlaceholderNombre = "Ingrese el nombre";
         private const string PlaceholderApellido = "Ingrese el apellido";
@@ -24,6 +24,7 @@ namespace SistemaEmpleados
         private const string PlaceholderSalario = "Solo numeros";
         private const string PlaceholderEdad = "Su edad es...";
         private const string PlaceholderAntiguedad = "Su antigüedad es...";
+        private const string PlaceholderPrestaciones="Sus prestaciones son...";
         public SitemaEmpleados()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace SistemaEmpleados
             setPlaceholder(txtSalario, PlaceholderSalario);
             setPlaceholder(txtCalcularEdad, PlaceholderEdad);
             setPlaceholder(txtAntiguedad, PlaceholderAntiguedad);
+            setPlaceholder(txtPrestaciones, PlaceholderPrestaciones);
 
         }
         private void txtNombre_TextChanged(object sender, EventArgs e)
@@ -80,8 +82,8 @@ namespace SistemaEmpleados
                 return;
             }
 
-            int nuevoSalario;
-            if (!int.TryParse(txtSalario.Text, out nuevoSalario))
+            double nuevoSalario;
+            if (!double.TryParse(txtSalario.Text, out nuevoSalario))
             {
                 lblMensajeEmple.Text = "⚠ Ingrese un salario válido (solo números)";
                 lblMensajeEmple.ForeColor = Color.Red;
@@ -94,28 +96,31 @@ namespace SistemaEmpleados
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            fecha = new Fecha();
+            Fecha fecha = new Fecha();
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
-            string generoText = txtGenero.Text; // Convertir a minúsculas
+            string generoText = txtGenero.Text; 
             string fechaNac = txtFechaNacimiento.Text;
             string fechaIng = txtFechaIngreso.Text;
             string salario = txtSalario.Text;
             char genero = generoText[0];
 
-            string[] campos = { nombre, apellido, genero.ToString(), fechaNac, fechaIng, salario };
+            string[] campos = {nombre, apellido, genero.ToString(), fechaNac, fechaIng, salario};
             string[] placeholders = { PlaceholderNombre, PlaceholderApellido, PlaceholderFechaNacimiento, PlaceholderFechaIngreso, PlaceholderSalario, PlaceholderGenero };
 
-            for (int i = 0; i < campos.Length; i++)
-            {
-                if (string.IsNullOrWhiteSpace(campos[i]) || campos[i] == placeholders[i])
+            if (nombre == PlaceholderNombre && apellido == PlaceholderApellido && generoText == PlaceholderGenero && fechaNac == PlaceholderFechaNacimiento && fechaIng == PlaceholderFechaIngreso && salario == PlaceholderSalario)
+            { 
+                for (int i = 0; i < campos.Length; i++)
                 {
-                    lblMensajeEmple.Text = "⚠ Todos los campos son obligatorios y deben ser válidos";
-                    lblMensajeEmple.ForeColor = Color.Red;
-                    return;
+
+                    if (string.IsNullOrWhiteSpace(campos[i]) || campos[i] == placeholders[i])
+                    {
+                        lblMensajeEmple.Text = "⚠ Todos los campos son obligatorios y deben ser válidos";
+                        lblMensajeEmple.ForeColor = Color.Red;
+                        return;
+                    }
                 }
             }
-
 
             if (genero == 'f' || genero == 'F')
             {
@@ -144,32 +149,40 @@ namespace SistemaEmpleados
                 }
             }
 
-            if (salario == PlaceholderSalario || salario == "")
-            {
-                lblMensajeEmple.Text = "⚠ Debe digitar un salario";
-                lblMensajeEmple.ForeColor = Color.Red;
-                return;
-            } 
-            else if (double.Parse(salario) < 0)
-            {
-                lblMensajeEmple.Text = "⚠ El salario no puede ser negativo";
-                lblMensajeEmple.ForeColor = Color.Red;
-                return;
-            }
-
-
-            string[] fechaDivNac = fechaNac.Split('/');
-            string[] fechaDivIng = fechaIng.Split('/');
 
             try
-            { 
-                Fecha pFechaNac = new Fecha(int.Parse(fechaDivNac[0]), int.Parse(fechaDivNac[1]), int.Parse(fechaDivNac[2]));
-                Fecha pFechaIng = new Fecha(int.Parse(fechaDivIng[0]), int.Parse(fechaDivIng[1]), int.Parse(fechaDivIng[2]));
-                double pSalario = double.Parse(salario);
+            {
 
-                empleado = new Empleado(nombre, apellido, genero, pFechaNac, pFechaIng, pSalario);
+                if ((fechaNac == "" || fechaNac == PlaceholderFechaNacimiento) &&
+                            (fechaIng == "" || fechaIng == PlaceholderFechaIngreso) &&
+                            (salario == "" || salario == PlaceholderSalario))
+                {
+                    empleado = new Empleado(nombre, apellido, genero);
+                }
+                // Si hay salario pero no fechas
+                else if ((fechaNac == "" || fechaNac == PlaceholderFechaNacimiento) &&
+                         (fechaIng == "" || fechaIng == PlaceholderFechaIngreso) &&
+                         (salario != "" && salario != PlaceholderSalario))
+                {
+                    double pSalario = double.Parse(salario);
+                    empleado = new Empleado(nombre, apellido, genero, pSalario);
+                }
+
+                else
+                {
+                    string[] fechaDivNac = fechaNac.Split('/');
+                    string[] fechaDivIng = fechaIng.Split('/');
+                    Fecha pFechaNac = new Fecha(int.Parse(fechaDivNac[0]), int.Parse(fechaDivNac[1]), int.Parse(fechaDivNac[2]));
+                    Fecha pFechaIng = new Fecha(int.Parse(fechaDivIng[0]), int.Parse(fechaDivIng[1]), int.Parse(fechaDivIng[2]));
+                    double pSalario = double.Parse(salario);
+                    empleado = new Empleado(nombre, apellido, genero, pFechaNac, pFechaIng, pSalario);
+                }
+
+
                 lblMensajeEmple.Text = "✅ Información guardada correctamente";
                 lblMensajeEmple.ForeColor = Color.Green;
+
+
             }
             catch
             {
@@ -236,6 +249,7 @@ namespace SistemaEmpleados
             setPlaceholder(txtSalario, "Solo numeros");
             setPlaceholder(txtCalcularEdad, "Su edad es...");
             setPlaceholder(txtAntiguedad, "Su antigüedad es...");
+            setPlaceholder(txtPrestaciones, "Sus prestaciones son...");
             lblMensajeEmple.Text = "";
             lblMensajeEmple.Text = "";
         }
@@ -245,8 +259,63 @@ namespace SistemaEmpleados
             Application.Exit();
         }
 
+        private void btnOpcion1_Click(object sender, EventArgs e)
+        {
+        
+
+            if (empleado == null)
+            {
+                lblMensajeEmple.Text = "⚠ No hay empleado registrado";
+                lblMensajeEmple.ForeColor = Color.Red;
+                return;
+            }
+
+            MessageBox.Show("Su salario actual es: "+empleado.getSalario().ToString("N0"), "SALARIO");
+        
+        }
+
+        private void btnOpcion2_Click(object sender, EventArgs e)
+        {
+            if (empleado == null)
+            {
+                lblMensajeEmple.Text = "⚠ No hay empleado registrado";
+                lblMensajeEmple.ForeColor = Color.Red;
+                return;
+            }
+            MessageBox.Show("La fecha de ingreso es: "+ empleado.getFechaIngreso().toString());
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCalcularPrestaciones_Click(object sender, EventArgs e)
+        {
+            if (empleado == null)
+            {
+                txtPrestaciones.Text = "Debe registrar un empleado";
+                txtPrestaciones.ForeColor = Color.Red;
+                return;
+            }
+
+            Fecha fechaIng = empleado.getFechaIngreso();
+
+            // Calcular edad actual
+            Fecha fechaNac = empleado.getFechaNacimiento();
+            DateTime fechaNacimiento = new DateTime(fechaNac.getAnio(), fechaNac.getMes(), fechaNac.getDia());
+            int edad = DateTime.Today.Year - fechaNacimiento.Year;
+            if (DateTime.Today < fechaNacimiento.AddYears(edad))
+                edad=edad-1;
+
+            int antiguedad= fechaIng.getAnio() - DateTime.Today.Year;
+
+            // Calcular prestaciones
+            double prestaciones = (edad * antiguedad) / 12.0;
+
+            txtPrestaciones.Text = prestaciones.ToString("N2");
+            txtPrestaciones.ForeColor = Color.Black;
+        }
     }
 }
-
-
-
