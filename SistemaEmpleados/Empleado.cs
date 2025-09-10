@@ -45,6 +45,7 @@ namespace SistemaEmpleados
             this.fechaIngreso = pFechaIngreso;
             this.salario = pSalario;
 
+
         }
         //Metodos
         public string getNombre()

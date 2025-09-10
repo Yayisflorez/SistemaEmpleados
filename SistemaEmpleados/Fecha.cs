@@ -28,6 +28,7 @@ namespace SistemaEmpleados
             this.mes = hoy.Month;
             this.anio = hoy.Year;
 
+
         }
         //Metodos
         public int getDia()
