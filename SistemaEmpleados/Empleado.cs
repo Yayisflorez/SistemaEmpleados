@@ -9,74 +9,92 @@ namespace SistemaEmpleados
     internal class Empleado
     {
         //Atributos
-        private string  Nombre;
-        private string Apellido;
-        private string Genero;
-        private DateTime FechaNacimiento;
-        private int Salario;
-        private DateTime FechaIngreso;
+        private string  nombre;
+        private string apellido;
+        private char genero;
+        private Fecha fechaNacimiento;
+        private double salario;
+        private Fecha fechaIngreso;
         private string Placeholder;
 
         //Constructor
-        public Empleado(string pNombre, string pApellido, string pGenero, DateTime pFechaNacimiento, DateTime pFechaIngreso, int NuevoSalario)
+        public Empleado(string pNombre, string pApellido, char pGenero) 
         { 
-            this.Nombre = pNombre;
-            this.Apellido = pApellido;
-            this.Genero = pGenero;
-            this.FechaNacimiento = pFechaNacimiento;
-            this.FechaIngreso = pFechaIngreso;
-            this.Salario = NuevoSalario;
+            this.nombre = pNombre;
+            this.apellido = pApellido;
+            this.genero = pGenero;
+            this.fechaNacimiento = new Fecha();
+            this.fechaIngreso = new Fecha();
+            this.salario = 0;
+        }
+
+        public Empleado(string pNombre, string pApellido, char pGenero, double pSalario)
+        {
+            this.nombre = pNombre;
+            this.apellido = pApellido;
+            this.genero = pGenero;
+            this.salario = pSalario;
+        }
+
+        public Empleado(string pNombre, string pApellido, char pGenero, Fecha pFechaNacimiento, Fecha pFechaIngreso, double pSalario)
+        { 
+            this.nombre = pNombre;
+            this.apellido = pApellido;
+            this.genero = pGenero;
+            this.fechaNacimiento = pFechaNacimiento;
+            this.fechaIngreso = pFechaIngreso;
+            this.salario = pSalario;
 
         }
         //Metodos
         public string getNombre()
         {
-            return this.Nombre;
+            return this.nombre;
         }
         public void setNombre(string pNombre)
         {
-            this.Nombre = pNombre;
+            this.nombre = pNombre;
         }
         public string getApellido()
         {
-            return this.Apellido;
+            return this.apellido;
         }
         public void setApellido(string pApellido)
         {
-            this.Apellido = pApellido;
+            this.apellido = pApellido;
         }
-        public string getGenero()
+        public char getGenero()
         {
-            return this.Genero;
+            return this.genero;
         }
-        public void setGenero(string pGenero)
+        public void setGenero(char pGenero)
         {
-            this.Genero = pGenero;
+            this.genero = pGenero;
         }
-        public DateTime getFechaNacimiento()
+        public Fecha getFechaNacimiento()
         {
-            return this. FechaNacimiento;
+            return this. fechaNacimiento;
         }
-        public void setFechaNacimiento(DateTime pFechaNacimiento)
+        public void setFechaNacimiento(Fecha pFechaNacimiento)
         {
-            this.FechaNacimiento = pFechaNacimiento;
+            this.fechaNacimiento = pFechaNacimiento;
         }
-        public DateTime getFechaIngreso()
+        public Fecha getFechaIngreso()
         {
-            return this. FechaIngreso;
+            return this.fechaIngreso;
         }
-        public void setFechaIngreso(DateTime pFechaIngreso)
+        public void setFechaIngreso(Fecha pFechaIngreso)
         {
-             this.FechaIngreso = pFechaIngreso;
+             this.fechaIngreso = pFechaIngreso;
         }
 
-        public int getSalario()
+        public double getSalario()
         {
-            return this.Salario;
+            return this.salario;
         }
-        public void ModificarSalario(int NuevoSalario)
+        public void ModificarSalario(double pSalario)
         {
-            this.Salario = NuevoSalario;
+            this.salario = pSalario;
         }
         public string getPlaceholder()
         {

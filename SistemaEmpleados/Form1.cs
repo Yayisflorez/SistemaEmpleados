@@ -14,10 +14,11 @@ namespace SistemaEmpleados
     public partial class SitemaEmpleados : Form
     {
         Empleado empleado;
+        Fecha fecha;
 
         private const string PlaceholderNombre = "Ingrese el nombre";
         private const string PlaceholderApellido = "Ingrese el apellido";
-        private const string PlaceholderGenero = "f o m";
+        private const string PlaceholderGenero = "'f' o 'm'";
         private const string PlaceholderFechaNacimiento = "dd/mm/aa";
         private const string PlaceholderFechaIngreso = "dd/mm/aa";
         private const string PlaceholderSalario = "Solo numeros";
@@ -37,6 +38,7 @@ namespace SistemaEmpleados
             setPlaceholder(txtSalario, PlaceholderSalario);
             setPlaceholder(txtCalcularEdad, PlaceholderEdad);
             setPlaceholder(txtAntiguedad, PlaceholderAntiguedad);
+
         }
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
@@ -91,17 +93,18 @@ namespace SistemaEmpleados
         }
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            fecha = new Fecha();
             string nombre = txtNombre.Text;
             string apellido = txtApellido.Text;
-            string genero = txtGenero.Text.ToLower(); // Convertir a minúsculas
+            string generoText = txtGenero.Text; // Convertir a minúsculas
             string fechaNac = txtFechaNacimiento.Text;
             string fechaIng = txtFechaIngreso.Text;
-            string salarioTxt = txtSalario.Text;
+            string salario = txtSalario.Text;
+            char genero = generoText[0];
 
-            string[] campos = { nombre, apellido, genero, fechaNac, fechaIng, salarioTxt };
-            string[] placeholders = { PlaceholderNombre, PlaceholderApellido, PlaceholderGenero.ToLower(),
-                              PlaceholderFechaNacimiento, PlaceholderFechaIngreso, PlaceholderSalario };
-            // Validar que todos los campos estén llenos y no contengan solo el placeholder
+            string[] campos = { nombre, apellido, genero.ToString(), fechaNac, fechaIng, salario };
+            string[] placeholders = { PlaceholderNombre, PlaceholderApellido, PlaceholderFechaNacimiento, PlaceholderFechaIngreso, PlaceholderSalario, PlaceholderGenero };
+
             for (int i = 0; i < campos.Length; i++)
             {
                 if (string.IsNullOrWhiteSpace(campos[i]) || campos[i] == placeholders[i])
@@ -111,38 +114,59 @@ namespace SistemaEmpleados
                     return;
                 }
             }
-            DateTime fechaNacimiento;
-            DateTime fechaIngreso;
-            int salario;
-        
-            // Validar género con imagen en PictureBox
-            if (genero == "f")
+
+
+            if (genero == 'f' || genero == 'F')
             {
                 pictureBox1.Image = Properties.Resources.mujer; // Imagen de mujer
                 this.BackColor = Color.LightPink;
             }
-            else if (genero == "m")
+            else if (genero == 'm' || genero == 'M')
             {
                 pictureBox1.Image = Properties.Resources.hombre; // Imagen de hombre
                 this.BackColor = Color.LightBlue;
             }
             else
             {
-                lblMensajeEmple.Text = "⚠ El género debe ser 'f' o 'm'";
+                if (generoText == PlaceholderGenero)
+                {
+                    lblMensajeEmple.Text = "⚠ Debe digitar una genero";
+                    lblMensajeEmple.ForeColor = Color.Red;
+                    return;
+
+                }
+                else
+                {
+                    lblMensajeEmple.Text = "⚠ El género debe ser 'f' o 'm'";
+                    lblMensajeEmple.ForeColor = Color.Red;
+                    return;
+                }
+            }
+
+            if (salario == PlaceholderSalario || salario == "")
+            {
+                lblMensajeEmple.Text = "⚠ Debe digitar un salario";
+                lblMensajeEmple.ForeColor = Color.Red;
+                return;
+            } 
+            else if (double.Parse(salario) < 0)
+            {
+                lblMensajeEmple.Text = "⚠ El salario no puede ser negativo";
                 lblMensajeEmple.ForeColor = Color.Red;
                 return;
             }
 
-            // 🔹 Validar fechas y salario
+
+            string[] fechaDivNac = fechaNac.Split('/');
+            string[] fechaDivIng = fechaIng.Split('/');
+
             try
-            {
-                fechaNacimiento = DateTime.Parse(fechaNac);
-                fechaIngreso = DateTime.Parse(fechaIng);
-                salario = int.Parse(salarioTxt);
+            { 
+                Fecha pFechaNac = new Fecha(int.Parse(fechaDivNac[0]), int.Parse(fechaDivNac[1]), int.Parse(fechaDivNac[2]));
+                Fecha pFechaIng = new Fecha(int.Parse(fechaDivIng[0]), int.Parse(fechaDivIng[1]), int.Parse(fechaDivIng[2]));
+                double pSalario = double.Parse(salario);
 
-                // Crear empleado
-                empleado = new Empleado(nombre, apellido, genero, fechaNacimiento, fechaIngreso, salario);
-
+                empleado = new Empleado(nombre, apellido, genero, pFechaNac, pFechaIng, pSalario);
                 lblMensajeEmple.Text = "✅ Información guardada correctamente";
                 lblMensajeEmple.ForeColor = Color.Green;
             }
@@ -206,20 +230,20 @@ namespace SistemaEmpleados
         {
             setPlaceholder(txtNombre, "Ingrese el nombre");
             setPlaceholder(txtApellido, "Ingrese el apellido");
-            setPlaceholder(txtGenero, "f o m");
             setPlaceholder(txtFechaNacimiento, "dd/mm/aa");
             setPlaceholder(txtFechaIngreso, "dd/mm/aa");
             setPlaceholder(txtSalario, "Solo numeros");
             setPlaceholder(txtCalcularEdad, "Su edad es...");
             setPlaceholder(txtAntiguedad, "Su antigüedad es...");
             lblMensajeEmple.Text = "";
-            lblMensaje.Text = "";
+            lblMensajeEmple.Text = "";
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
     }
 }
 
