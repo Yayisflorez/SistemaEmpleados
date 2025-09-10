@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +34,8 @@ namespace SistemaEmpleados
             this.apellido = pApellido;
             this.genero = pGenero;
             this.salario = pSalario;
+            this.fechaNacimiento = new Fecha();
+            this.fechaIngreso = new Fecha();
         }
 
         public Empleado(string pNombre, string pApellido, char pGenero, Fecha pFechaNacimiento, Fecha pFechaIngreso, double pSalario)
