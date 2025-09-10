@@ -121,34 +121,40 @@ namespace SistemaEmpleados
                     }
                 }
             }
-
-            if (genero == 'f' || genero == 'F')
+            if (generoText.Length > 1)
             {
-                pictureBox1.Image = Properties.Resources.mujer; // Imagen de mujer
-                this.BackColor = Color.LightPink;
-            }
-            else if (genero == 'm' || genero == 'M')
-            {
-                pictureBox1.Image = Properties.Resources.hombre; // Imagen de hombre
-                this.BackColor = Color.LightBlue;
-            }
-            else
-            {
-                if (generoText == PlaceholderGenero)
+                lblMensajeEmple.Text = "⚠ El género debe ser 'f' o 'm'";
+                lblMensajeEmple.ForeColor = Color.Red;
+                return;
+            } else {
+                
+                if (genero == 'f' || genero == 'F')
                 {
-                    lblMensajeEmple.Text = "⚠ Debe digitar una genero";
-                    lblMensajeEmple.ForeColor = Color.Red;
-                    return;
-
+                    pictureBox1.Image = Properties.Resources.mujer; // Imagen de mujer
+                    this.BackColor = Color.LightPink;
+                }
+                else if (genero == 'm' || genero == 'M')
+                {
+                    pictureBox1.Image = Properties.Resources.hombre; // Imagen de hombre
+                    this.BackColor = Color.LightBlue;
                 }
                 else
                 {
-                    lblMensajeEmple.Text = "⚠ El género debe ser 'f' o 'm'";
-                    lblMensajeEmple.ForeColor = Color.Red;
-                    return;
+                    if (generoText == PlaceholderGenero)
+                    {
+                        lblMensajeEmple.Text = "⚠ Debe digitar una genero";
+                        lblMensajeEmple.ForeColor = Color.Red;
+                        return;
+
+                    }
+                    else
+                    {
+                        lblMensajeEmple.Text = "⚠ El género debe ser 'f' o 'm'";
+                        lblMensajeEmple.ForeColor = Color.Red;
+                        return;
+                    }
                 }
             }
-
 
             try
             {
@@ -246,6 +252,7 @@ namespace SistemaEmpleados
             setPlaceholder(txtApellido, "Ingrese el apellido");
             setPlaceholder(txtFechaNacimiento, "dd/mm/aa");
             setPlaceholder(txtFechaIngreso, "dd/mm/aa");
+            setPlaceholder(txtGenero, "'f' o 'm'");
             setPlaceholder(txtSalario, "Solo numeros");
             setPlaceholder(txtCalcularEdad, "Su edad es...");
             setPlaceholder(txtAntiguedad, "Su antigüedad es...");
@@ -309,7 +316,7 @@ namespace SistemaEmpleados
             if (DateTime.Today < fechaNacimiento.AddYears(edad))
                 edad=edad-1;
 
-            int antiguedad= fechaIng.getAnio() - DateTime.Today.Year;
+            int antiguedad= DateTime.Today.Year - fechaIng.getAnio();
 
             // Calcular prestaciones
             double prestaciones = (edad * antiguedad) / 12.0;
